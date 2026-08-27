@@ -1,24 +1,26 @@
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.contextMenus.create({
+const api = (typeof browser !== 'undefined' && browser.runtime) ? browser : chrome;
+
+api.runtime.onInstalled.addListener(() => {
+  api.contextMenus.create({
     id: "convert-to-qr",
-    title: "将选中文字转为二维码(Q)(&Q)",
+    title: "制码[&Q]",
     contexts: ["selection"]
   });
 });
 
-chrome.contextMenus.onClicked.addListener((info, tab) => {
+api.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId === "convert-to-qr" && info.selectionText) {
-    chrome.scripting.executeScript({
+    api.scripting.executeScript({
       target: { tabId: tab.id },
-      files: ["content.js"]
+      files: ["productMap.js", "content.js"]
     }).then(() => {
       setTimeout(() => {
-        chrome.tabs.sendMessage(tab.id, {
+        api.tabs.sendMessage(tab.id, {
           action: "showQrFromText",
           text: info.selectionText
         }).catch(err => {
           console.error("发送消息失败:", err);
-          chrome.notifications.create({
+          api.notifications.create({
             type: "basic",
             title: "文本转二维码",
             message: "无法与当前页面通信，请刷新页面后重试。"
@@ -27,7 +29,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
       }, 50);
     }).catch(err => {
       console.error("注入脚本失败:", err);
-      chrome.notifications.create({
+      api.notifications.create({
         type: "basic",
         title: "文本转二维码",
         message: "无法在此页面执行操作（可能是安全页面）。"

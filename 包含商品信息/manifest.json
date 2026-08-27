@@ -1,13 +1,13 @@
 {
   "manifest_version": 3,
   "name": "文本转二维码（右键菜单）",
-  "version": "1.0",
+  "version": "1.1",
   "description": "选中网页文字，右键菜单转换为二维码，一行一个，悬浮窗显示。二次开发：https://gitee.com/cnwz/text2qr-extension",
   "permissions": ["contextMenus", "activeTab", "scripting", "notifications"],
   "background": {
     "service_worker": "background.js"
   },
-  "icons": {
+  "icons": {        
     "16": "qr-code-16.png",
     "48": "qr-code-48.png",
     "128": "qr-code-128.png"
