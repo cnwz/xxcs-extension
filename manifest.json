@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "文本转二维码（右键菜单）",
-  "version": "1.1",
+  "version": "1.2.0",
   "description": "选中网页文字，右键菜单转换为二维码，一行一个，悬浮窗显示。二次开发：https://gitee.com/cnwz/text2qr-extension",
   "permissions": ["contextMenus", "activeTab", "scripting", "notifications"],
   "background": {

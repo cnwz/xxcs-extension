@@ -1,10 +1,20 @@
-// 兼容 Firefox 和 Chrome/Edge 的 API 命名空间
+/**
+ * @file background.js
+ * @description 文本转二维码插件 - 后台服务脚本，创建右键菜单，兼容 Chrome、Edge、Firefox。
+ * @author ls_wuzhen20
+ * @homepage https://gitee.com/cnwz/text2qr-extension
+ * @since 2026-05-05
+ * @lastupdate 2026-09-09
+ * @version 1.2.0
+ */
+
 const api = (typeof browser !== 'undefined' && browser.runtime) ? browser : chrome;
 
 api.runtime.onInstalled.addListener(() => {
+  // 可自定义菜单文字，& 后字母为快捷键（如 &Q 表示按 Q 触发）
   api.contextMenus.create({
     id: "convert-to-qr",
-    title: "将选中文字转为二维码(Q)(&Q)",
+    title: "制码->英文输入法状态下按[&Q]",
     contexts: ["selection"]
   });
 });
@@ -13,7 +23,7 @@ api.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId === "convert-to-qr" && info.selectionText) {
     api.scripting.executeScript({
       target: { tabId: tab.id },
-      files: ["content.js"]
+      files: ["productMap.js", "content.js"]
     }).then(() => {
       setTimeout(() => {
         api.tabs.sendMessage(tab.id, {

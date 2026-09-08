@@ -84,6 +84,7 @@ const productMapData = new Map([
 ├── manifest.json        // 扩展清单（Manifest V3）
 ├── background.js        // 后台服务（注册右键菜单、注入 content script）
 ├── content.js           // 页面注入脚本（UI 渲染、二维码生成、文本处理）
+├── productMap.js        // 商品映射表（内置示例）
 ├── qr-code-16.png       // 图标（16x16）
 ├── qr-code-48.png       // 图标（48x48）
 └── qr-code-128.png      // 图标（128x128）
