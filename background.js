@@ -13,7 +13,7 @@ const api = (typeof browser !== 'undefined' && browser.runtime) ? browser : chro
 // ==================== 常量 ====================
 
 const UPDATE_REPO = 'cnwz/xxcs-extension';
-const UPDATE_BRANCH = 'main'; // 默认分支是 master 就改这里
+const UPDATE_BRANCH = 'master'; // 默认分支是 master 就改这里
 const CDN_BASE = `https://cdn.jsdelivr.net/gh/${UPDATE_REPO}@${UPDATE_BRANCH}/`;
 const PING_URL = `${CDN_BASE}ping.txt`;
 const VERSION_URL = `${CDN_BASE}version.json`;
